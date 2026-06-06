@@ -1,0 +1,565 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap");
+
+/* ════════════════════════════════════════════════════════
+   ANIMATIONS
+════════════════════════════════════════════════════════ */
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes grain-shift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-2%, -1%);
+  }
+  20% {
+    transform: translate(2%, 1%);
+  }
+  30% {
+    transform: translate(-1%, 2%);
+  }
+  40% {
+    transform: translate(1%, -2%);
+  }
+  50% {
+    transform: translate(-2%, 1%);
+  }
+  60% {
+    transform: translate(2%, -1%);
+  }
+  70% {
+    transform: translate(-1%, -2%);
+  }
+  80% {
+    transform: translate(1%, 2%);
+  }
+  90% {
+    transform: translate(-2%, 0%);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ════════════════════════════════════════════════════════
+   GLOBAL SURFACE EFFECTS
+════════════════════════════════════════════════════════ */
+
+/* Subtle dot-grid background */
+.grid-bg {
+  background-size: 44px 44px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+}
+
+/* Film-grain overlay via ::before on <body> */
+.grain::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.55;
+  animation: grain-shift 8s steps(2) infinite;
+}
+
+/* Neo-glass panel */
+.neo-glass {
+  background: rgba(17, 16, 16, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Material Icons render setting */
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+/* ════════════════════════════════════════════════════════
+   LAYOUT UTILITIES
+════════════════════════════════════════════════════════ */
+
+/* Max-width centered wrapper — use instead of "max-w-container-max mx-auto" */
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Standard section padding — use instead of "py-section-gap px-margin-edge relative z-10" */
+.section {
+  padding: 140px 40px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Section heading block — use instead of "mb-14 border-b hr-subtle pb-6" */
+.section-header {
+  margin-bottom: 56px;
+  border-bottom: 1px solid rgba(59, 74, 62, 0.35);
+  padding-bottom: 24px;
+}
+
+/* Horizontal rule color */
+.hr-subtle {
+  border-color: rgba(59, 74, 62, 0.35);
+}
+
+/* ════════════════════════════════════════════════════════
+   TYPOGRAPHY
+════════════════════════════════════════════════════════ */
+
+/* Green section counter label */
+.section-label {
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #39ff9b;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* Hero stat number */
+.stat-val {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  color: #e4e2e0;
+}
+
+/* Hero stat label */
+.stat-label {
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7a7a78;
+  margin-top: 4px;
+}
+
+/* ════════════════════════════════════════════════════════
+   NAVIGATION
+════════════════════════════════════════════════════════ */
+
+.nav-link {
+  position: relative;
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #bacbbb;
+  transition: color 0.3s ease;
+}
+.nav-link:hover {
+  color: #e4e2e0;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #39ff9b;
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ════════════════════════════════════════════════════════
+   BUTTONS
+════════════════════════════════════════════════════════ */
+
+/* Magnetic wrapper — applied to every interactive button */
+.mag-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Primary: green fill */
+.btn-primary {
+  background-color: #39ff9b;
+  color: #111010;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow:
+    6px 6px 14px #070707,
+    -4px -4px 12px #1b1a1a;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.btn-primary:hover {
+  background-color: #00e385;
+}
+
+/* Secondary: dark fill with border */
+.btn-secondary {
+  background-color: #1a1b1a;
+  color: #e4e2e0;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 28px;
+  border: 1px solid rgba(59, 74, 62, 0.4);
+  border-radius: 8px;
+  box-shadow:
+    6px 6px 14px #070707,
+    -4px -4px 12px #1b1a1a;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.btn-secondary:hover {
+  background-color: #292a29;
+  border-color: rgba(57, 255, 155, 0.25);
+}
+
+/* ════════════════════════════════════════════════════════
+   BADGES & TAGS
+════════════════════════════════════════════════════════ */
+
+/* Animated status pill in hero */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(59, 74, 62, 0.4);
+  background: rgba(17, 16, 16, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  margin-bottom: 40px;
+}
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #39ff9b;
+  animation: blink 1s step-end infinite;
+  flex-shrink: 0;
+}
+.status-text {
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #bacbbb;
+}
+
+/* Stack / tech tags */
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border: 1px solid rgba(59, 74, 62, 0.4);
+  border-radius: 6px;
+  background-color: #1a1b1a;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #bacbbb;
+  box-shadow:
+    6px 6px 14px #070707,
+    -4px -4px 12px #1b1a1a;
+}
+.tag-accent {
+  border-color: rgba(57, 255, 155, 0.25);
+  color: #39ff9b;
+}
+
+/* ════════════════════════════════════════════════════════
+   BLINKING CURSOR
+════════════════════════════════════════════════════════ */
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Floating cursor badge on photo */
+.cursor-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 14px;
+  height: 22px;
+  background: #39ff9b;
+  border-radius: 1px;
+  z-index: 20;
+  animation: blink 1s step-end infinite;
+}
+
+/* ════════════════════════════════════════════════════════
+   PHOTO EFFECTS
+════════════════════════════════════════════════════════ */
+
+.photo-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+/* Green gradient halo border */
+.photo-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 2px;
+  background: linear-gradient(
+    145deg,
+    rgba(57, 255, 155, 0.35) 0%,
+    transparent 50%,
+    rgba(57, 255, 155, 0.12) 100%
+  );
+  z-index: -1;
+  filter: blur(1px);
+}
+
+/* Green glow puddle under photo */
+.photo-wrap::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 65%;
+  height: 40px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(57, 255, 155, 0.25) 0%,
+    transparent 70%
+  );
+  filter: blur(12px);
+  z-index: -1;
+}
+
+/* CRT scan-line overlay */
+.photo-scanline {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.04) 3px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Left-edge green rim-light on photo */
+.rim-light {
+  box-shadow:
+    -3px 0 20px rgba(57, 255, 155, 0.2),
+    0 0 60px rgba(57, 255, 155, 0.06),
+    inset -1px 0 0 rgba(57, 255, 155, 0.15);
+}
+
+/* ════════════════════════════════════════════════════════
+   PARTICLE CANVAS
+════════════════════════════════════════════════════════ */
+
+#particles-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* ════════════════════════════════════════════════════════
+   SCROLL REVEAL
+════════════════════════════════════════════════════════ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+.reveal-delay-2 {
+  transition-delay: 0.18s;
+}
+.reveal-delay-3 {
+  transition-delay: 0.26s;
+}
+.reveal-delay-4 {
+  transition-delay: 0.36s;
+}
+
+/* ════════════════════════════════════════════════════════
+   HERO ENTRANCE ANIMATIONS
+════════════════════════════════════════════════════════ */
+
+.hero-text-1 {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+.hero-text-2 {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both;
+}
+.hero-text-3 {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.34s both;
+}
+.hero-text-4 {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both;
+}
+.hero-text-5 {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.54s both;
+}
+.hero-photo {
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+/* ════════════════════════════════════════════════════════
+   CARDS
+════════════════════════════════════════════════════════ */
+
+.service-card {
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(57, 255, 155, 0.25) !important;
+}
+
+.portfolio-card {
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+}
+.portfolio-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 0 0 1px rgba(57, 255, 155, 0.3),
+    6px 6px 14px #070707;
+}
+
+/* ════════════════════════════════════════════════════════
+   PROCESS CONNECTOR LINE
+════════════════════════════════════════════════════════ */
+
+.process-line {
+  position: absolute;
+  top: 40px;
+  left: calc(16.66% + 48px);
+  right: calc(16.66% + 48px);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 74, 62, 0.5) 20%,
+    rgba(57, 255, 155, 0.2) 50%,
+    rgba(59, 74, 62, 0.5) 80%,
+    transparent
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   TESTIMONIAL GLOW
+════════════════════════════════════════════════════════ */
+
+.testimonial-glow {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(57, 255, 155, 0.06) 0%,
+    transparent 65%
+  );
+}
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE — MOBILE
+════════════════════════════════════════════════════════ */
+
+/* px-margin-edge: Tailwind CDN can't read custom config tokens.
+   Define here so nav, hero, footer get correct padding on all screens. */
+.px-margin-edge {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+@media (min-width: 768px) {
+  .px-margin-edge {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+/* Reduce section vertical padding on mobile (140px is too tall) */
+@media (max-width: 767px) {
+  .section {
+    padding: 80px 20px;
+  }
+}
+
+/* Hamburger bars */
+.menu-bar {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: #e4e2e0;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  border-radius: 1px;
+}
+#menu-toggle.open .menu-bar:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+#menu-toggle.open .menu-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+#menu-toggle.open .menu-bar:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
